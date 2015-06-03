@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "AkkaChat - Register";
+}
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<AkkaChat.ViewModels.NewUser>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <h1>Register an AkkaChat Account</h1>
+        @if (ViewBag.ValidationError != null)
+        {
+            <div class="alert-error">
+                <p>Error! @ViewBag.ValidationError</p>
+            </div>
+        }
+
+        <form class="form-horizontal" method="POST" action="~/register">
+            <div class="control-group">
+                <label class="control-label" for="UserName">Username</label>
+                <div class="controls">
+                    <input type="text" name="UserName"  id="UserName" placeholder="Username">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="Email">Email</label>
+                <div class="controls">
+                    <input type="text" id="Email" name="Email" placeholder="Email">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Password">Password</label>
+                <div class="controls">
+                    <input type="password" name="Password" id="Password" placeholder="Password">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Register</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

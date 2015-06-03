@@ -1,0 +1,14 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@Html.Partial("Views/Shared/_head.cshtml")
+<body class="@ViewBag.BodyClass">
+    @Html.Partial("Views/Shared/_nav.cshtml")
+
+    <div id="body-wrap">
+        @RenderBody()
+    </div>
+    @Html.Partial("Views/Shared/_scripts.cshtml")
+    @* per page scripts *@
+    @RenderSection("Scripts", false)
+</body>
+</html>

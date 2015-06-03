@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaChat.Web", "AkkaChat.Web\AkkaChat.Web.csproj", "{E945E104-2687-4637-AE33-6EECBF157E8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaChat.Data", "AkkaChat.Data\AkkaChat.Data.csproj", "{A6B5AF83-1DCA-4EE1-8A07-7458D01092BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaChat.Web.Tests", "AkkaChat.Web.Tests\AkkaChat.Web.Tests.csproj", "{241A1F8A-5347-4F60-B761-D8A1AB1B789A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2292DB90-6D0E-4A54-8EB6-0D7BF4B5E788}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E945E104-2687-4637-AE33-6EECBF157E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E945E104-2687-4637-AE33-6EECBF157E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E945E104-2687-4637-AE33-6EECBF157E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E945E104-2687-4637-AE33-6EECBF157E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B5AF83-1DCA-4EE1-8A07-7458D01092BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B5AF83-1DCA-4EE1-8A07-7458D01092BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B5AF83-1DCA-4EE1-8A07-7458D01092BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B5AF83-1DCA-4EE1-8A07-7458D01092BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241A1F8A-5347-4F60-B761-D8A1AB1B789A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241A1F8A-5347-4F60-B761-D8A1AB1B789A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241A1F8A-5347-4F60-B761-D8A1AB1B789A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241A1F8A-5347-4F60-B761-D8A1AB1B789A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

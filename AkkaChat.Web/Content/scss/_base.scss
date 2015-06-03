@@ -1,0 +1,269 @@
+﻿*, *:before, *:after {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+body {
+  padding: 40px 0;
+}
+
+ul > li {
+  list-style: none;
+}
+
+.scroll-x {
+  overflow-x: auto;
+}
+
+.scroll-y {
+  overflow-y: auto;
+}
+
+#body-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  background-color: #fcfcfc;
+  padding-top: 40px;
+}
+
+
+.left-sidebar, .right-sidebar, .main-content {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.left-sidebar {
+  background-color: #304047;
+  color: white;
+  padding-top: 15px;
+}
+
+.right-sidebar {
+}
+
+$messagesMaxHeight: 95%;
+$chatBoxHeight: 10%;
+
+.messages-container {
+  overflow: auto;
+  max-height: $messagesMaxHeight;
+
+  &.chatting {
+    max-height: $messagesMaxHeight - $chatBoxHeight;
+  }
+
+  .message {
+    margin: 15px auto;
+    font-size: 18px;
+    padding: 4px;
+
+    &:nth-of-type(odd) {
+      background-color: #f6f6f6;
+    }
+  }
+}
+
+#chatMessage {
+  width: 87%;
+}
+
+
+.chat-box {
+  height: $chatBoxHeight;
+  width: 100%;
+}
+
+.members-container {
+  max-height: $messagesMaxHeight;
+  overflow: auto;
+}
+
+// HELPERS
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-bold {
+  font-weight: bold !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.text-italic {
+  font-style: italic !important;
+}
+
+.text-red {
+  color: red !important;
+}
+
+.text-purple {
+  color: purple !important;
+}
+
+.text-blue {
+  color: blue !important;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-black {
+  color: black !important;
+}
+
+.text-upper {
+  text-transform: uppercase !important;
+}
+
+.text-lower {
+  text-transform: lowercase !important;
+}
+
+.text-strike {
+  text-decoration: line-through !important;
+}
+
+.bg-shadow {
+  &.dark {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &.light {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  h2 {
+    background-color: transparent !important;
+  }
+}
+
+.round-corners {
+  border-radius: 5px;
+}
+
+.no-padding {
+  padding: 0px !important;
+
+  *:not(.button) {
+    padding: 0px !important;
+  }
+}
+
+.left {
+  float: left !important;
+}
+
+.right {
+  float: right !important;
+}
+
+.center {
+  float: none;
+  margin: 0 auto;
+  display: block;
+}
+
+.img-center {
+  display: block;
+  margin: 0 auto;
+}
+
+.img-left {
+  display: block;
+  float: left !important;
+  margin: 25px;
+}
+
+.img-right {
+  display: block;
+  float: right !important;
+  margin: 25px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hide-for-small {
+  display: inherit !important;
+}
+
+a.button.hide-for-small {
+  display: inline-block !important;
+  vertical-align: top;
+  zoom: 1; /* Fix for IE7 */
+  *display: inline; /* Fix for IE7 */
+}
+
+.show-for-small {
+  display: none !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+  vertical-align: top;
+  zoom: 1; /* Fix for IE7 */
+  *display: inline; /* Fix for IE7 */
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+
+// MEDIA QUERIES
+// large screen only
+@media only screen and (max-width: 768px) {
+  .show-for-large {
+    display: none !important;
+  }
+}
+
+// medium screen only
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+}
+
+// small screen only
+@media only screen and (max-width: 480px) {
+  .hide-for-small, a.button.hide-for-small, .show-for-medium {
+    display: none !important;
+  }
+
+  .show-for-small {
+    display: inherit !important;
+  }
+}

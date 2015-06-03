@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Homepage";
+    ViewBag.BodyClass = "home";
+    var authenticated = Context.CurrentUser.IsAuthenticated();
+}
+
+@using System.Collections.Generic
+@using Nancy.Security
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<AkkaChat.Modules.User>>
+
+
+<div class="row-fluid">
+    <div class="span3 left-sidebar">
+        @if (authenticated)
+        {
+            <div>
+                Welcome back, <strong>@Context.CurrentUser.UserName</strong>
+            </div>
+        }
+        else
+        {
+            <a href="~/login">
+                <button class="btn btn-success center signup-button @if (authenticated)
+                                                                    {<text>hidden</text>}">
+                    Login to start chatting!
+                </button>
+            </a>
+        }
+
+    </div>
+    <div class="span7 main-content">
+        <div class="messages-container @if (authenticated)
+                                       {<text>chatting</text>}">
+            <!-- ko foreach: messages -->
+            <div data-bind="html: message" class="message"></div>
+            <!-- /ko -->
+
+            @* TODO: REMOVE DUMMY DATA SECTION *@
+            @*@foreach (var message in (List<String>)ViewBag.Messages)
+            {
+                <div class="message">@message</div>
+            }*@
+            @* END TODO *@
+
+        </div>
+        <div class="chat-box @if (!authenticated){<text>hidden</text>}">
+            @if (authenticated)
+            {
+                <textarea rows="3" class="form-control" placeholder="Type a nice message.." id="chatMessage"></textarea>
+                <button class="btn btn-default" type="button" id="btnQuery">Send</button>
+            }
+
+            @* TODO: REMOVE DUMMY DATA SECTION *@
+                @*<textarea rows="3" class="form-control" placeholder="Type a nice message.." id="chatMessage"></textarea>
+                    <button class="btn btn-default" type="button" id="btnQuery">Send</button>*@
+                @* // END TODO *@
+            </div>
+        </div>
+
+        <div class="span2 right-sidebar">
+            <div class="members-container">
+                <ul>
+                    <!-- ko foreach: users -->
+                    <li data-bind="text: displayName"></li>
+                    <!-- /ko -->
+                    @* TODO: REMOVE DUMMY DATA SECTION *@
+                    @*@foreach (var user in Model)
+                        {
+                            <li>@user.Name</li>
+                        }*@
+                    @* // END TODO *@
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/content/scripts/knockout-3.3.0.js"></script>
+        <script src="~/content/scripts/jquery.signalR-2.2.0.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+        @if (Context.CurrentUser.IsAuthenticated())
+        {
+            <script>
+                var userName = '@Context.CurrentUser.UserName';
+                var isAuthenticated = true; //OBVIOUSLY SUPER NOT SECURE
+            </script>
+        }
+
+        @* TODO: REMOVE DUMMY DATA SECTION *@
+        @*<script>
+            var userName = 'andrew';
+            var isAuthenticated = true; //OBVIOUSLY SUPER NOT SECURE
+        </script>*@
+        @* // END TODO *@
+
+
+        <script>
+            function ChatViewModel() {
+                var self = this;
+
+                self.users = ko.observableArray([]);
+                self.messages = ko.observableArray([]);
+
+                self.addMessage = function (message) {
+                    if (message.IsSystemMessage) {
+                        console.log("Systemmessage");
+                        var sMessage = "<em>" + message.Content + " (" + message.WhenStr + ")</em>";
+                        self.messages.unshift({ message: sMessage, time: message.WhenTicks });
+                    } else {
+                        var uMessage = "<strong>" + message.User.DisplayName + "</strong> (<em>" + message.WhenStr + "</em>): " + message.Content;
+                        self.messages.unshift({ message: uMessage, time: message.WhenTicks });
+                    }
+
+                    self.messages.sort(function (left, right) {
+                        return left.time == right.time ? 0
+                            : (left.time < right.time ? -1 : 1);
+                    });
+                }
+
+
+                self.addUser = function (user) {
+                    self.users.push({ displayName: user.DisplayName });
+                }
+
+                self.removeUser = function (user) {
+                    self.users.destroy(function (u) {
+                        return u.displayName === user.displayName;
+                    });
+                }
+            }
+
+            var chatView = new ChatViewModel();
+            ko.applyBindings(chatView);
+
+            $(function () {
+                var currentRoom = "Default";
+
+                // Reference the auto-generated proxy for the hub.
+                var chat = $.connection.chatHub;
+
+                // Create a function that the hub can call back to display messages.
+                chat.client.addMessage = function (room, message) {
+                    console.log(message);
+                    chatView.addMessage(message);
+                };
+
+                chat.client.addUser = function (room, user) {
+                    chatView.addUser(user);
+                };
+
+                chat.client.removeUser = function (room, user) {
+                    chatView.removeUser(user);
+                };
+
+                $.connection.hub.start().done(function () {
+                    console.log("Hub started");
+
+                    // submit on button click
+                    window.listenForClickSubmit(chat, "#btnQuery", "#chatMessage", currentRoom, userName);
+
+                    // submit on enter key (but not shift + enter)
+                    window.listenForEnterSubmit(chat, "#chatMessage", currentRoom, userName);
+
+                    chat.server.joinRoom(currentRoom, userName);
+                });
+            });
+
+        </script>
+    }
